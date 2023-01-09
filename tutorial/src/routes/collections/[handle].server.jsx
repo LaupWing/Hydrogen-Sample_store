@@ -1,26 +1,48 @@
-import { gql, useRouteParams, useShopQuery } from "@shopify/hydrogen"
-import React from "react"
+import { gql, Seo, ShopifyAnalyticsConstants, useRouteParams, useServerAnalytics, useShopQuery } from "@shopify/hydrogen"
+import React, { Suspense } from "react"
 import Layout from "../../components/Layout.server"
 
 const Collection = () => {
    const { handle } = useRouteParams()
 
-   // const {
-   //    data: { collection }
-   // } = useShopQuery({
-   //    query: QUERY,
-   //    variables: {
-   //       handle
-   //    }
-   // })
+   const {
+      data: { collection }
+   } = useShopQuery({
+      query: QUERY,
+      variables: {
+         handle
+      }
+   })
 
-   // console.log(collection)
+   useServerAnalytics({
+      shopify: {
+         pageType: ShopifyAnalyticsConstants.pageType.collection,
+         resourceId: collection.id
+      }
+   })
 
    return (
       <Layout>
-         <section className="p-6 md:p-8 lg:p-12">
-            This will be collection page for <strong>{handle}</strong>
-         </section>
+         <Suspense>
+            <Seo 
+               type="collection"
+               data={collection}
+            />
+         </Suspense>
+         <header className="grid w-full gap-8 p-4 py-8 md:p-8 lg:p-12 justify-items-start">
+            <h1 className="text-4xl whitespace-pre-wrap font-bold inline-block">
+               {collection.title}
+            </h1>
+            {collection.description && (
+               <div className="flex items-baseline w-full justify-between">
+                  <div>
+                     <p className="max-w-md whitespace-pre-wrap inherit text-copy inline-block">
+                        {collection.description}
+                     </p>
+                  </div>
+               </div>
+            )}
+         </header>
       </Layout>
    )
 }
@@ -30,7 +52,13 @@ export default Collection
 const QUERY = gql`
    query CollectionDetails($handle: String!) {
       collection(handle: $handle) {
+         id
          title
+         description
+         seo {
+            description
+            title
+         }
       }
    }
 `
