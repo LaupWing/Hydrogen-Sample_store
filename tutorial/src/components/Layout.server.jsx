@@ -1,4 +1,5 @@
 import { CacheLong, gql, Link, Seo, useShopQuery, useUrl } from "@shopify/hydrogen"
+import { Suspense } from "react"
 
 
 const Layout = ({ children }) => {
@@ -15,13 +16,15 @@ const Layout = ({ children }) => {
 
    return (
       <>
-         <Seo
-            type="defaultSeo"
-            data={{
-               title: shop.name,
-               description: shop.description
-            }}
-         />
+         <Suspense>
+            <Seo
+               type="defaultSeo"
+               data={{
+                  title: shop.name,
+                  description: shop.description
+               }}
+            />
+         </Suspense>
          <div className="flex flex-col min-h-screen antialiased bg-neutral-50">
             <div>
                <a 
@@ -50,7 +53,9 @@ const Layout = ({ children }) => {
                id="mainContent"
                className="flex-grow"
             >
-               {children}
+               <Suspense>
+                  {children}
+               </Suspense>
             </main>
          </div>
       </>
