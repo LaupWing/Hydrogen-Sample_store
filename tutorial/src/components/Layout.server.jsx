@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
    } = useShopQuery({
       query: SHOP_QUERY,
       cache: CacheLong(),
-      preload: false
+      preload: true
    })
 
    return (

@@ -6,7 +6,6 @@ const FeaturedCollections = () => {
       data: { collections }
    } = useShopQuery({
       query: QUERY,
-      preload: false,
       cache: CacheLong()
    })
 
