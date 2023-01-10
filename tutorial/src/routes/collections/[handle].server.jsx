@@ -9,6 +9,7 @@ const Collection = () => {
       data: { collection }
    } = useShopQuery({
       query: QUERY,
+      preload: false,
       variables: {
          handle
       }
