@@ -17,7 +17,7 @@ const Collection = () => {
       data: { collection }
    } = useShopQuery({
       query: QUERY,
-      preload: false,
+      preload: true,
       variables: {
          handle
       }
