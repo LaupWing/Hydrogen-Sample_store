@@ -1,5 +1,12 @@
-import { gql, Seo, ShopifyAnalyticsConstants, useRouteParams, useServerAnalytics, useShopQuery } from "@shopify/hydrogen"
-import React, { Suspense } from "react"
+import { 
+   gql, 
+   Seo, 
+   ShopifyAnalyticsConstants, 
+   useRouteParams, 
+   useServerAnalytics, 
+   useShopQuery 
+} from "@shopify/hydrogen"
+import { Suspense } from "react"
 import Layout from "../../components/Layout.server"
 
 const Collection = () => {
@@ -59,6 +66,40 @@ const QUERY = gql`
          seo {
             description
             title
+         }
+         image {
+            id
+            url
+            width
+            height
+            altText
+         }
+         products(first: 8) {
+            nodes {
+               id
+               title
+               publishedAt
+               handle
+               variants(first: 1){
+                  nodes {
+                     id
+                     image {
+                        url
+                        altText
+                        width
+                        height
+                     }
+                     priceV2{
+                        amount
+                        currencyCode
+                     }
+                     compareAtPriceV2{
+                        amount
+                        currencyCode
+                     }
+                  }
+               }
+            }
          }
       }
    }
