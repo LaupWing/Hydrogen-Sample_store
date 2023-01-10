@@ -1,4 +1,4 @@
-import { useRouteParams } from "@shopify/hydrogen"
+import { gql, useRouteParams } from "@shopify/hydrogen"
 import Layout from "../../components/Layout.server"
 
 const Product = () => {
@@ -14,3 +14,11 @@ const Product = () => {
 }
 
 export default Product
+
+const PRODUCT_QUERY = gql`
+   query Product($language: LanguageCode, $handle: String!) @inContext(language: $language){
+      product(handle: $handle){
+         id
+      }
+   }
+`
