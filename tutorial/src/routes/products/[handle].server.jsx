@@ -37,41 +37,41 @@ const Product = () => {
 export default Product
 
 const PRODUCT_QUERY = gql`
-   query Product($handle: String!){
-      fragment MediaFields on Media {
-         mediaContentType
-         alt
-         previewImage {
+   fragment MediaFields on Media {
+      mediaContentType
+      alt
+      previewImage {
+         url
+      }
+      ... on MediaImage {
+         id
+         image {
             url
-         }
-         ... on MediaImage {
-            id
-            image {
-               url
-               width
-               height
-            }
-         }
-         ... on Video {
-            id
-            sources {
-               mimeType
-               url
-            }
-         }
-         ... on Model3d {
-            id
-            sources {
-               mimeType
-               url
-            }
-         }
-         ... on ExternalVideo {
-            id
-            embedUrl
-            host
+            width
+            height
          }
       }
+      ... on Video {
+         id
+         sources {
+            mimeType
+            url
+         }
+      }
+      ... on Model3d {
+         id
+         sources {
+            mimeType
+            url
+         }
+      }
+      ... on ExternalVideo {
+         id
+         embedUrl
+         host
+      }
+   }
+   query Product($handle: String!){
       product(handle: $handle){
          id
          title
@@ -107,7 +107,7 @@ const PRODUCT_QUERY = gql`
                }
                sku
                title
-               uintPrice{
+               unitPrice{
                   amount
                   currencyCode
                }
