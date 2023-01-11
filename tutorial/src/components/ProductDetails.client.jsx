@@ -1,4 +1,4 @@
-import { MediaFile, ProductOptionsProvider, useProductOptions } from "@shopify/hydrogen"
+import { BuyNowButton, MediaFile, ProductOptionsProvider, ProductPrice, useProductOptions } from "@shopify/hydrogen"
 
 const ProductDetails = ({ product }) => {
    return (
@@ -19,6 +19,7 @@ const ProductDetails = ({ product }) => {
                         {product.vendor}
                      </span>
                   </div>
+                  <ProductForm product={product}/>
                   <div className="mt-8">
                      <div
                         className="prose border-t border-gray-200 pt-6 text-black text-md"
@@ -64,6 +65,32 @@ function ProductForm({ product }){
                   </div>
                )
             })}
+         </div>
+         <div>
+            <ProductPrice
+               className="text-gray-500 line-through text-lg font-semibold"
+               priceType="compareAt"
+               variantId={selectedVariant.id}
+               data={product}
+            />
+            <ProductPrice
+               className="text-gray-900 text-lg font-semibold"
+               variantId={selectedVariant.id}
+               data={product}
+            />
+         </div>
+         <div className="grid items-stretch gap-4">
+            {isOutOfStock ? (
+               <span className="text-black text-center py-3 px-6 border rounded-sm leading-none">
+                  Available in 2-3 weeks
+               </span>
+            ) :(
+               <BuyNowButton>
+                  <span className="bg-black text-white inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leading-none w-full border">
+                     Buy it now
+                  </span>
+               </BuyNowButton>
+            )}
          </div>
       </form>
    )
