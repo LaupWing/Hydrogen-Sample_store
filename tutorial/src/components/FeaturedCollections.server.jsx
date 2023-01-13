@@ -1,5 +1,4 @@
 import { CacheLong, gql, Image, Link, useShopQuery } from "@shopify/hydrogen"
-import React from "react"
 
 const FeaturedCollections = () => {
    const {
