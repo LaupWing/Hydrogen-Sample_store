@@ -143,3 +143,31 @@ const CartLineItem = () => {
       </li>
    )
 }
+
+const CartLineQuantityAdjust = ({ lineId, quantity }) => (
+   <>
+      <label htmlFor={`quantity-${lineId}`} className="sr-only">
+         Quantity, {quantity}
+      </label>
+      <div className="flex items-center overflow-auto border rounded">
+         <CartLineQuantityAdjustButton
+            adjust="decrease"
+            aria-label="Decrease quantity"
+            className="h-[40px] flex justify-center items-center px-3 py-[0.125rem] transition text-primary/40 hover:text-primary disabled:pointer-events-none disabled:cursor-wait"
+         >
+            &#8722;
+         </CartLineQuantityAdjustButton>
+         <CartLineQuantity
+            as="div"
+            className="h-[40px] flex justify-center items-center text-center py-[0.125rem] px-2 text-primary/90"
+         />
+         <CartLineQuantityAdjustButton
+            adjust="increase"
+            aria-label="Increase quantity"
+            className="h-[40px] flex justify-center items-center px-3 py-[0.125rem] transition text-primary/40 hover:text-primary disabled:pointer-events-none disabled:cursor-wait"
+         >
+            &#43;
+         </CartLineQuantityAdjustButton>
+      </div>
+   </>
+)
