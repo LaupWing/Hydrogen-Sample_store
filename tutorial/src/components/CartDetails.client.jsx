@@ -23,3 +23,8 @@ const CartDetails = () => {
 }
 
 export default CartDetails
+
+
+export const CartEmpty = ({ onClose }) => {
+
+}
