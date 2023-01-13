@@ -25,7 +25,10 @@ const Header = ({ shop }) => {
             <button
                onClick={openDrawer}
                className="relative flex items-center justify-center w-8 h-8"
-            ></button>
+            >
+               <IconBag/>
+               <CartBadge dark={isHome}/>
+            </button>
          </header>
       </>
    )
