@@ -37,7 +37,7 @@ const ProductDetails = ({ product }) => {
 
 export default ProductDetails
 
-function ProductForm({ product }){
+const ProductForm = ({ product }) => {
    const { options, selectedVariant } = useProductOptions()
    const isOutOfStock = !selectedVariant?.availableForSale || false
 
@@ -96,7 +96,7 @@ function ProductForm({ product }){
    )
 }
 
-function OptionRadio({values, name}) {
+const OptionRadio = ({values, name}) => {
    const {selectedOptions, setSelectedOption} = useProductOptions()
 
    return (
@@ -129,7 +129,7 @@ function OptionRadio({values, name}) {
    )
 }
 
-function ProductGallery({ media }){
+const ProductGallery = ({ media }) => {
    if(!media.length){
       return null;  
    }
