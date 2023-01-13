@@ -1,4 +1,11 @@
-import { BuyNowButton, MediaFile, ProductOptionsProvider, ProductPrice, useProductOptions } from "@shopify/hydrogen"
+import { 
+   BuyNowButton, 
+   MediaFile, 
+   ProductOptionsProvider, 
+   ProductPrice, 
+   useProductOptions,
+   AddToCartButton 
+} from "@shopify/hydrogen"
 
 const ProductDetails = ({ product }) => {
    return (
@@ -80,19 +87,41 @@ const ProductForm = ({ product }) => {
             />
          </div>
          <div className="grid items-stretch gap-4">
-            {isOutOfStock ? (
-               <span className="text-black text-center py-3 px-6 border rounded-sm leading-none">
-                  Available in 2-3 weeks
-               </span>
-            ) :(
-               <BuyNowButton>
-                  <span className="bg-black text-white inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leading-none w-full border">
-                     Buy it now
-                  </span>
-               </BuyNowButton>
-            )}
+            <PurchaseMarkup/>
          </div>
       </form>
+   )
+}
+
+const PurchaseMarkup = () => { 
+   const { selectedVariant } = useProductOptions()
+   const isOutOfStock = !selectedVariant?.availableForSale || false
+
+   return (
+      <>
+         <AddToCartButton
+            type="button"
+            variantId={selectedVariant.id}
+            quantity={1}
+            accessibleAddingToCartLabel="Adding item to your cart"
+            disabled={isOutOfStock}
+         >
+            <span className="bg-black text-white inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leading-none w-full">
+               {isOutOfStock ? "Sold out": "Add to cart"}
+            </span>
+         </AddToCartButton>
+         {isOutOfStock ? (
+            <span className="text-black text-center py-3 px-6 border rounded-sm leading-none">
+               Available in 2-3 weeks
+            </span>
+         ) : (
+            <BuyNowButton variantId={selectedVariant.id}>
+               <span className="inline-block rounded-sm font-medium text-center py-3 px-6 max-w-xl leanding-none border w-full">
+                  Buy it now
+               </span>
+            </BuyNowButton>
+         )}
+      </>
    )
 }
 
