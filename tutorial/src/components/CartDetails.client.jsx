@@ -29,9 +29,21 @@ const CartDetails = ({ onClose }) => {
                   <CartLineProvider
                      key={line.id}
                      line={line}
-                  ></CartLineProvider>
+                  >
+                     <CartLineItem/>
+                  </CartLineProvider>
                ))}
             </ul>
+         </section>
+         <section
+            aria-labelledby="summary-heading"
+            className="p-4 border-t md:px-12"
+         >
+            <h2 id="summary-heading" className="sr-only">
+               Order summary
+            </h2>
+            <OrderSummary />
+            <CartCheckoutActions/>
          </section>
       </form>
    )
