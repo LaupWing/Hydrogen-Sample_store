@@ -101,3 +101,45 @@ const OrderSummary = () => {
       </>
    )
 }
+
+const CartLineItem = () => {
+   const { linesRemove } = useCart()
+   const { id: lineId, quantity, merchandise } = useCartLine()
+
+   return (
+      <li 
+         key={lineId} 
+         className="flex"
+      >
+         <div className="flex-shrink-0">
+            <Image
+               data={merchandise.image}
+               className="object-cover object-center w-24 h-24 border rounded md:w-28 md:h-28"
+            />
+         </div>
+
+         <div className="flex justify-between flex-1 ml-4 sm:ml-6">
+            <div className="relative grid gap-1">
+               <h3 className="font-medium">
+                  <Link to={`/products/${merchandise.product.handle}`}>
+                     {merchandise.product.title}
+                  </Link>
+               </h3>
+               <div className="flex flex-col justify-start mt-2">
+                  {(merchandise?.selectedOptions || []).map(option => (
+                     <span key={option.name} className="last:mb-4 text-gray-400">
+                        {option.name}: {option.value}
+                     </span>
+                  ))}
+               </div>
+
+               <div className="flex items-center gap-2 mt-auto">
+                  <div className="flex justify-start text-copy mr-4">
+                     {/* <CartLine */}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </li>
+   )
+}
