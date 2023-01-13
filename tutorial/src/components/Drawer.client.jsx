@@ -59,7 +59,7 @@ Drawer.Title = Dialog.Title
 
 export { Drawer }
 
-export function useDrawer(openDefault = false){
+export const useDrawer = (openDefault = false) => {
    const [isOpen, setIsOpen] = useState(openDefault)
 
    function openDrawer(){
@@ -77,7 +77,7 @@ export function useDrawer(openDefault = false){
    }
 }
 
-function IconClose() {
+const IconClose = () => {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
