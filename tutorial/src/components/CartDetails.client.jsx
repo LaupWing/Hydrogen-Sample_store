@@ -52,7 +52,7 @@ const CartDetails = ({ onClose }) => {
 export default CartDetails
 
 export const CartEmpty = ({ onClose }) => {
-   ;<div className="flex flex-col space-y-7 justify-center items-center md:py-8 md:px-12 px-4 py-6 h-screen">
+   return (<div className="flex flex-col space-y-7 justify-center items-center md:py-8 md:px-12 px-4 py-6 h-screen">
       <h2 className="whitespace-pre-wrap max-w-prose font-bold text-4xl">
          Your cart is empty
       </h2>
@@ -62,7 +62,7 @@ export const CartEmpty = ({ onClose }) => {
       >
          Continue shopping
       </button>
-   </div>
+   </div>)
 }
 
 const CartCheckoutActions = () => {
