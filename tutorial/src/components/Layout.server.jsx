@@ -1,12 +1,9 @@
-import { CacheLong, gql, Link, Seo, useShopQuery, useUrl } from "@shopify/hydrogen"
+import { CacheLong, gql, Seo, useShopQuery } from "@shopify/hydrogen"
 import { Suspense } from "react"
 import Header from "./Header.client"
 
 
 const Layout = ({ children }) => {
-   const { pathname } = useUrl()
-   const isHome = pathname === "/"
-
    const {
       data: { shop }
    } = useShopQuery({
