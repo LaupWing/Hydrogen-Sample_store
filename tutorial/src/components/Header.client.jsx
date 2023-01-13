@@ -1,5 +1,6 @@
 import { Drawer, useDrawer } from "./Drawer.client"
 import { useUrl, Link, useCart } from "@shopify/hydrogen"
+import CartDetails from "./CartDetails.client"
 
 const Header = ({ shop }) => {
    const { pathname } = useUrl()
@@ -9,7 +10,14 @@ const Header = ({ shop }) => {
 
    return (
       <>
-         <Drawer open={isOpen} onClose={closeDrawer}/>
+         <Drawer open={isOpen} onClose={closeDrawer}>
+            <div className="grid">
+               <Drawer.Title>
+                  <h2 className="sr-only">Cart Drawer</h2>
+               </Drawer.Title>
+               <CartDetails onClose={closeDrawer}/>
+            </div>
+         </Drawer>
          <header
             role={"banner"}
             className={`flex items-center h-16 p-6 md:p-8 lg:p-12 sticky backdrop-blur-lg z-40 top-0 justify-between w-full leading-none gap-4 antialiased transition shadow-sm ${
