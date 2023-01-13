@@ -2,13 +2,13 @@ import { Transition, Dialog } from "@headlessui/react"
 import { Fragment } from "react"
 
 
-const Drawer = () => {
+const Drawer = ({open, onClose, children}) => {
    return ( 
       <Transition appear show={open} as={Fragment}>
          <Dialog 
             as="div" 
             className="relative z-50" 
-            onClose={()=>{}}
+            onClose={onClose}
          >
             <Transition.Child
                as={Fragment}
@@ -33,7 +33,23 @@ const Drawer = () => {
                         leaveFrom="translate-x-0"
                         leaveTo="translate-x-full"
                      >
-                        
+                        <Dialog.Panel className="max-w-lg transform text-left align-middle shadow-xl transition-all antialiased bg-neutral-50">
+                           <header className="sticky top-0 flex items-center justify-between px-4 h-24 sm:px-8 md:px-12">
+                              <h2
+                                 id="cart-contents"
+                                 className="whitespace-pre-wrap max-w-prose font-bold text-lg"
+                              >
+                                 Cart
+                              </h2>
+                              <button
+                                 type="button"
+                                 className="p-4 m-4 transition text-primary hover:text-primary/50"
+                              >
+
+                              </button>
+                           </header>
+                           {children}
+                        </Dialog.Panel>
                      </Transition.Child>
                   </div>
                </div>
